@@ -12,17 +12,17 @@ Misc setup for the server
 
 """
 
-db_models.Base.metadata.create_all(bind=engine)
+# db_models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
 # Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+# def get_db():
+#     db = SessionLocal()
+#     try:
+#         yield db
+#     finally:
+#         db.close()
 
 origins = ["*"]
 
@@ -45,12 +45,12 @@ def root():
 
 
 # Accept image from frontend
-@app.post("/image", tags={"Image"})
-async def upload_image(image: UploadFile = File(...)):
+@app.post("/predict", tags={"Image"})
+async def upload_image(image: UploadFile):
     # Process the uploaded image here
     # You can access the image using `file.file` and perform any necessary operations
     # Return the response accordingly
-    image
+    
 
     return {"filename": image.filename}
 
